@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>绘制小球</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    #myCanvas{
-      width:100%;
+    #myCanvas {
+      width: 100%;
       height: 600px;
-      background:#000;
+      background: #000;
     }
   </style>
 </head>
+
 <body>
   <canvas id="myCanvas">
-    
+
   </canvas>
 </body>
 <script>
-  function Ball(x,y,r) {
+  function Ball(x, y, r) {
     this.x = x;
     this.y = y;
     this.r = r;
@@ -31,9 +33,9 @@
   //定义填充颜色
   var ctx = myCanvas.getContext('2d');
   ctx.fillStyle = 'red';
-  Ball.prototype.draw = function(){
+  Ball.prototype.draw = function () {
     ctx.beginPath();
-    ctx.arc(this.x,this.y,this.r,0,2*Math.PI,true);
+    ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, true);
     ctx.closePath();
     ctx.fill()
   }
@@ -41,22 +43,23 @@
   // ball.draw()
 
   var BallFactory = function (num) {
-    if(num){
+    if (num) {
       var result = [];
       for (var i = 0; i < num; i++) {
         result.push(arguments.callee())
       }
       return result;
-    }else{
+    } else {
       var x = Math.random() * width;
       var y = Math.random() * height;
       var r = Math.random() * 2 + 2;
       return new Ball(x, y, r);
-    }       
+    }
   }
   var ballArr = new BallFactory(40);
   ballArr.forEach(element => {
     element.draw()
   });
 </script>
+
 </html>
